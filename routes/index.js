@@ -11,6 +11,7 @@ function routerApi(app) {
   router.use('/products', productsRouter);
   router.use('/users', usersRouter);
   router.use('/categories', categoriesRouter);
+  router.use('/orders', orderRouter);
 }
 
 module.exports = routerApi;
