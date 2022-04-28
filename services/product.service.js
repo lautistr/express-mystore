@@ -1,5 +1,5 @@
 const faker = require('faker');
-const boom = require('boom');
+const boom = require('@hapi/boom');
 
 class ProductsService {
 
@@ -23,7 +23,7 @@ class ProductsService {
 
   async create(data) {
     const newProduct = {
-      id: faker.datatype.uuid,
+      id: faker.datatype.uuid(),
       ...data
     };
     this.products.push(newProduct);

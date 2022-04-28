@@ -1,12 +1,25 @@
 const express = require('express');
+const cors = require('cors');
 const routerApi = require('./routes');
 
-const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handle.js');
+const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler.js');
 
 const app = express();
-const port = 3000;
+const port = proccess.env.PORT || 3000;
 
 app.use(express.json());
+
+const whiteList = ['http://localhost:8080', 'https://lautistr.com'];
+const options = {
+  origin: (origin, cb) => {
+    if (whiteList.includes(origin) || !origin) {
+      cb(null, true);
+    } else {
+      cb(new Error('Not allowed'));
+    }
+  }
+}
+app.use(cors(options));
 
 app.get('/', (req, res) => {
   res.send('Hola mi server en express');
